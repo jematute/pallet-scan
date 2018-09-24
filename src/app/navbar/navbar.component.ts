@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   constructor(public router: Router) { 
-    
+    this.user = this.logins[0];
     this.date = this.getCurrentDate();
     this.logins = [
       {label:'MSmith', value:{id:1, name: 'MSmith', code: 'MS'}},
@@ -22,15 +22,25 @@ export class NavbarComponent implements OnInit {
       {label:'Test4', value:{id:5, name: 'Test4', code: 'PRS'}}
   ];
   }
-
+  text = "MSmith";
+  user: any;
+  results = [];
   date: any;
-  logins: SelectItem[];
+  logins = [];
 
   ngOnInit() {
+    
     interval(1000).subscribe(() => {
       this.date = this.getCurrentDate();
     });
     
+  }
+
+  search(event) {
+    this.results = this.logins.filter(i => {
+      if (i.value.name.startsWith(event.query))
+        return i;
+    }).map(s => s.name);
   }
 
   getCurrentDate() {

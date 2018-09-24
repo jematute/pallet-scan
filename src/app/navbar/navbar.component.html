@@ -10,7 +10,8 @@
     <div class="right-align">
         <div class="login-info">
             <span>User Login: </span>
-            <p-dropdown [options]="logins" [(ngModel)]="selectedLogin"></p-dropdown>
+            <p-autoComplete [(ngModel)]="text" [suggestions]="results" (completeMethod)="search($event)"></p-autoComplete>
+            <!-- <p-dropdown [options]="logins" [(ngModel)]="selectedLogin"></p-dropdown> -->
         </div>
         <div class="date">
             {{date}}
