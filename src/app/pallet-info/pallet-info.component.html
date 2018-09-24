@@ -1,0 +1,52 @@
+<div class="pallet-info">
+  <div>
+      <span>Pallet Scan</span>
+      <div class="status">
+        {{status}}
+      </div>
+  </div>
+  <div class="data-line">
+    <div class="data-el">
+        <span>Pallet Id</span>
+        <div class="data-box">
+          {{palletId}}
+        </div>
+    </div>
+    <div class="data-el">
+        <span>Pallet Status</span>
+        <div class="data-box">
+          {{palletStatus}}
+        </div>
+    </div>
+    <div class="data-el">
+        <span>Wrap Enable</span>
+        <div class="data-box">
+          {{wrapEnable}}
+        </div>
+    </div>
+    
+  </div>
+  <div class="alarm">
+    <span>Alarms</span>
+    <div class="alarm-box"></div>
+  </div>
+  <div class="system">
+      <span>System</span>
+      <div class="status">
+        {{system}}
+      </div>
+  </div>
+
+  <div class="controls">
+    <div (click)="start()" class="circle-button green">
+      <span>Start</span>
+      <span>Scan</span>
+    </div>
+    <div (click)="stop()" class="circle-button red">
+        <span>Stop</span>
+        <span>Scan</span>
+    </div>
+      
+  </div>
+
+</div>

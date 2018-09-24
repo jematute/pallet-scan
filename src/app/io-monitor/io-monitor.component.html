@@ -1,0 +1,46 @@
+<div class="io-monitor">
+  <div class="section">
+    <span class="section-label">Inputs</span>
+    <div class="item">
+      <div class="indicator" [ngClass]="{ green: wrapperReady, red: !wrapperReady }"></div>
+      <span>Wrapper Ready</span>
+    </div>
+    <div class="item">
+      <div class="indicator" [ngClass]="{ green: turnTableRotating, red: !turnTableRotating }"></div>
+      <span>Turntable Rotating</span>
+    </div>
+    <div class="item">
+      <div class="indicator" [ngClass]="{ green: turnTableHomeProx, red: !turnTableHomeProx }"></div>
+      <span>Turntable Home prox</span>
+    </div>
+    <div class="item">
+      <div class="indicator" [ngClass]="{ green: eStopActive, red: !eStopActive }"></div>
+      <span>E-Stop Active</span>
+    </div>
+
+  </div>
+  <div class="section">
+    <span class="section-label">Outputs</span>
+    <div class="item">
+      <div class="indicator" [ngClass]="{ green: rotateCommand, red: !rotateCommand }"></div>
+      <span>Rotate Command</span>
+    </div>
+    <div class="item">
+      <div class="indicator" [ngClass]="{ green: disableWrapping, red: !disableWrapping }"></div>
+      <span>Disable Wrapping</span>
+    </div>
+    <div class="item">
+      <div class="indicator" [ngClass]="{ green: wrapStart, red: !wrapStart }"></div>
+      <span>Wrap Start</span>
+    </div>
+    <div class="item">
+      <div class="indicator" [ngClass]="{ green: redBeacon, red: !redBeacon }"></div>
+      <span>Red Beacon</span>
+    </div>
+    <div class="item">
+        <div class="indicator" [ngClass]="{ green: greenBeacon, red: !greenBeacon }"></div>
+        <span>Green Beacon</span>
+      </div>
+
+  </div>
+</div>

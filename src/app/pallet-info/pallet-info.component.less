@@ -1,0 +1,89 @@
+:host {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,.25);
+    border-radius: 5px;
+    border: 1px solid rgb(200,200,200);
+    padding: 10px;
+}
+
+.pallet-info {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.status {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid rgb(200,200,200);
+    font-size: 26px;
+    height: 47px;
+}
+
+.data-line {
+    margin-top: 15px;
+    display: flex;
+    
+    .data-el {
+        margin-right: 5px;
+        flex: 0 0 32.8%;
+        display: inline-block;
+        .data-box {
+            border: 1px solid rgb(200,200,200);
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.alarm {
+    margin-top: 15px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    .alarm-box {
+        flex: 1 1 auto;
+        border: 1px solid rgb(200,200,200);
+        height: 100%;
+    }
+}
+
+.system {
+    margin-top: 15px;
+}
+
+.controls {
+    flex: 0 0 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle-button {
+    height: 125px;
+    width: 125px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid rgb(230,230,230);
+    cursor: pointer;
+    span {
+        font-size: 28px;
+    }
+  }
+
+  .green {
+    background: rgb(20, 243, 49);
+  }
+
+  .red {
+    background-color: tomato;
+  }
