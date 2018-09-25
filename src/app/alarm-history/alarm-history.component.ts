@@ -8,12 +8,14 @@ import { AlarmHistoryService } from './alarm-history.service';
 })
 export class AlarmHistoryComponent implements OnInit {
 
-  constructor(private alarmService: AlarmHistoryService) { }
-
-  ngOnInit() {
+  constructor(private alarmService: AlarmHistoryService) { 
     this.alarmService.getData().subscribe(data => {
       this.data = data;
     });
+  }
+
+  ngOnInit() {
+    
   }
 
   data = [];
