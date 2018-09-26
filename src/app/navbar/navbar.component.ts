@@ -4,6 +4,8 @@ import { interval } from 'rxjs';
 import {SelectItem} from 'primeng/api';
 import { Router } from '@angular/router';
 
+declare var $;
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -29,7 +31,9 @@ export class NavbarComponent implements OnInit {
   logins = [];
 
   ngOnInit() {
-    
+    $('#keyboard').keyboard({
+      autoAccept: true,
+    });
     interval(1000).subscribe(() => {
       this.date = this.getCurrentDate();
     });
@@ -55,6 +59,19 @@ export class NavbarComponent implements OnInit {
     };
     const date = new Date().toLocaleString(window.navigator.language, options);
     return date;
+  }
+
+  onFocus() {
+    var keyboard = $('#keyboard').getkeyboard();
+    keyboard.insertText("");
+    keyboard.reveal();
+    $('.ui-keyboard-input').bind('keyboardChange', event => {
+      this.user = keyboard.$preview.val();
+    })
+  }
+
+  onBlur() {
+
   }
 
 

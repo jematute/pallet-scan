@@ -9,9 +9,8 @@
     
     <div class="right-align">
         <div class="login-info">
-            <span>User Login: </span>
-            <p-autoComplete [(ngModel)]="text" [suggestions]="results" (completeMethod)="search($event)"></p-autoComplete>
-            <!-- <p-dropdown [options]="logins" [(ngModel)]="selectedLogin"></p-dropdown> -->
+            <input (focus)="onFocus()" [(ngModel)]="user">
+            <input type="text" style="display: none" id="keyboard">
         </div>
         <div class="date">
             {{date}}
