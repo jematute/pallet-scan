@@ -9,7 +9,8 @@
     
     <div class="right-align">
         <div class="login-info">
-            <input (focus)="onFocus()" [(ngModel)]="user">
+            <span>User Login</span>
+            <input (focus)="onFocus()" placeholder="not logged in" [(ngModel)]="wcsService.userId">
             <input type="text" style="display: none" id="keyboard">
         </div>
         <div class="date">

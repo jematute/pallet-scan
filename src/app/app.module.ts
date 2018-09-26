@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { AlarmHistoryModule } from './alarm-history/alarm-history.module';
 import { IoMonitorModule } from './io-monitor/io-monitor.module';
 import { UserSetupModule } from './user-setup/user-setup.module';
+import { WcsService } from './wcs.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,15 +22,16 @@ import { UserSetupModule } from './user-setup/user-setup.module';
     BrowserModule,
     AppRoutingModule,
     HomeModule,
-    NavbarModule, 
-    BrowserAnimationsModule, 
-    CaseHistoryModule, 
-    FormsModule, 
-    AlarmHistoryModule, 
-    IoMonitorModule, 
-    UserSetupModule
+    NavbarModule,
+    BrowserAnimationsModule,
+    CaseHistoryModule,
+    FormsModule,
+    AlarmHistoryModule,
+    IoMonitorModule,
+    UserSetupModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ WcsService, HttpClient ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

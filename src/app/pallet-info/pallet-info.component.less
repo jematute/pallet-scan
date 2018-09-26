@@ -37,6 +37,12 @@
             align-items: center;
             justify-content: center;
         }
+
+        .wrap-enable {
+            height: 35px;
+            text-align: center;
+            font-size: 16px;
+        }
     }
 }
 
@@ -74,6 +80,22 @@
     align-items: center;
     justify-content: center;
     border: 3px solid rgb(230,230,230);
+    position: relative;
+    .disable-overlay {
+        background: rgba(255,255,255, 0.6);
+        position: absolute;
+        height: 125px;
+        width: 125px;
+        border-radius: 50%;
+    }
+    .button-area {
+        background: transparent;
+        position: absolute;
+        height: 125px;
+        width: 125px;
+        border-radius: 50%;
+    }
+
     cursor: pointer;
     span {
         font-size: 28px;
