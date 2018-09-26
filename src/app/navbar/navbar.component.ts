@@ -42,9 +42,9 @@ export class NavbarComponent implements OnInit {
 
   search(event) {
     this.results = this.logins.filter(i => {
-      if (i.value.name.startsWith(event.query))
+      if (i.value.name.toLowerCase().startsWith(event.query.toLowerCase()))
         return i;
-    }).map(s => s.name);
+    }).map(s => s.value.name);
   }
 
   getCurrentDate() {

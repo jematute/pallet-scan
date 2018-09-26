@@ -23,12 +23,17 @@
     "@types/virtual-keyboard": "^1.26.0",
     "ag-grid-angular": "^19.0.0",
     "ag-grid-community": "^19.0.0",
+    "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
     "primeicons": "^1.0.0-beta.10",
     "primeng": "^6.1.4",
     "rxjs": "~6.2.0",
+<<<<<<< HEAD
     "virtual-keyboard": "^1.28.4",
+=======
+    "web-animations-js": "^2.3.1",
+>>>>>>> 4c3a9ec5708a4464eefed99a6a193531b66e2ad2
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
