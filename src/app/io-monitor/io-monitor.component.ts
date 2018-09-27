@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { WcsService } from '../wcs.service';
+import { IOData } from '../classes/io-data';
 
 @Component({
   selector: 'app-io-monitor',
@@ -7,19 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IoMonitorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private wcsService: WcsService) { }
+  data: IOData;
 
   ngOnInit() {
+    this.wcsService.getScreenData().subscribe(data => {
+      this.data = data;
+    });
   }
-
-  wrapperReady = true;
-  turnTableRotating = true;
-  turnTableHomeProx = true;
-  eStopActive = false;
-  rotateCommand = true;
-  disableWrapping = true;
-  wrapStart = true;
-  redBeacon = true;
-  greenBeacon = true;
-
 }

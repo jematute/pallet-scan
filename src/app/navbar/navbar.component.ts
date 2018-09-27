@@ -48,14 +48,6 @@ export class NavbarComponent implements OnInit {
 
   }
 
-  search(event) {
-    this.results = this.logins.filter(i => {
-      if (i.value.name.toLowerCase().startsWith(event.query.toLowerCase())) {
-        return i;
-      }
-    }).map(s => s.value.name);
-  }
-
   getCurrentDate() {
     const options = {
       weekday: 'long',

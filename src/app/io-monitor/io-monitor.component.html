@@ -2,19 +2,19 @@
   <div class="section">
     <span class="section-label">Inputs</span>
     <div class="item">
-      <div class="indicator" [ngClass]="{ green: wrapperReady, red: !wrapperReady }"></div>
+      <div class="indicator" [ngClass]="{ green: data.wrapperReady, red: !data.wrapperReady }"></div>
       <span>Wrapper Ready</span>
     </div>
     <div class="item">
-      <div class="indicator" [ngClass]="{ green: turnTableRotating, red: !turnTableRotating }"></div>
+      <div class="indicator" [ngClass]="{ green: data.turnTableRotating, red: !data.turnTableRotating }"></div>
       <span>Turntable Rotating</span>
     </div>
     <div class="item">
-      <div class="indicator" [ngClass]="{ green: turnTableHomeProx, red: !turnTableHomeProx }"></div>
+      <div class="indicator" [ngClass]="{ green: data.turnTableHomeProx, red: !data.turnTableHomeProx }"></div>
       <span>Turntable Home prox</span>
     </div>
     <div class="item">
-      <div class="indicator" [ngClass]="{ green: eStopActive, red: !eStopActive }"></div>
+      <div class="indicator" [ngClass]="{ green: data.eStopActive, red: !data.eStopActive }"></div>
       <span>E-Stop Active</span>
     </div>
 
@@ -22,23 +22,23 @@
   <div class="section">
     <span class="section-label">Outputs</span>
     <div class="item">
-      <div class="indicator" [ngClass]="{ green: rotateCommand, red: !rotateCommand }"></div>
+      <div class="indicator" [ngClass]="{ green: data.rotateCommand, red: !data.rotateCommand }"></div>
       <span>Rotate Command</span>
     </div>
     <div class="item">
-      <div class="indicator" [ngClass]="{ green: disableWrapping, red: !disableWrapping }"></div>
+      <div class="indicator" [ngClass]="{ green: data.disableWrapping, red: !data.disableWrapping }"></div>
       <span>Disable Wrapping</span>
     </div>
     <div class="item">
-      <div class="indicator" [ngClass]="{ green: wrapStart, red: !wrapStart }"></div>
+      <div class="indicator" [ngClass]="{ green: data.wrapStart, red: !data.wrapStart }"></div>
       <span>Wrap Start</span>
     </div>
     <div class="item">
-      <div class="indicator" [ngClass]="{ green: redBeacon, red: !redBeacon }"></div>
+      <div class="indicator" [ngClass]="{ green: data.redBeacon, red: !data.redBeacon }"></div>
       <span>Red Beacon</span>
     </div>
     <div class="item">
-        <div class="indicator" [ngClass]="{ green: greenBeacon, red: !greenBeacon }"></div>
+        <div class="indicator" [ngClass]="{ green: data.greenBeacon, red: !data.greenBeacon }"></div>
         <span>Green Beacon</span>
       </div>
 

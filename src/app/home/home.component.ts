@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { range } from 'rxjs';
-import { CasesService } from '../case-history/cases.service';
+import { WcsService } from '../wcs.service';
+import { Case } from '../classes/case';
 
 @Component({
   selector: 'app-home',
@@ -9,17 +9,17 @@ import { CasesService } from '../case-history/cases.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private caseService: CasesService) {
-    this.caseService.getCases().subscribe(data => {
-      this.data = data;
-    });
-   }
+  constructor(private wcsService: WcsService) {
 
-  ngOnInit() {
-    
   }
 
-  data = [];
+  ngOnInit() {
+    this.wcsService.getScreenData().subscribe(data => {
+      this.data = data as Case[];
+    });
+  }
+
+  data: Case[];
 
   columnDefs = [
     {headerName: 'Case Barcode', field: 'barcode' },

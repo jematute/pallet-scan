@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlarmHistoryService } from './alarm-history.service';
+import { WcsService } from '../wcs.service';
 
 @Component({
   selector: 'app-alarm-history',
@@ -8,14 +9,14 @@ import { AlarmHistoryService } from './alarm-history.service';
 })
 export class AlarmHistoryComponent implements OnInit {
 
-  constructor(private alarmService: AlarmHistoryService) { 
-    this.alarmService.getData().subscribe(data => {
-      this.data = data;
-    });
+  constructor(private wcsService: WcsService) { 
+    
   }
 
   ngOnInit() {
-    
+    this.wcsService.getScreenData().subscribe(data => {
+      this.data = data;
+    });
   }
 
   data = [];

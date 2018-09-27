@@ -1,6 +1,6 @@
 export interface ServerMessage {
-    Type: MessageType,
-    Message: string,
+    type: MessageType,
+    message: string,
 }
 
 export enum MessageType {

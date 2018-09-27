@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CasesService } from './cases.service';
+import { WcsService } from '../wcs.service';
 
 @Component({
   selector: 'app-case-history',
@@ -8,15 +9,13 @@ import { CasesService } from './cases.service';
 })
 export class CaseHistoryComponent implements OnInit {
 
-  constructor(private casesService: CasesService) {
-
-    this.casesService.getCases().subscribe(data => {
-      this.data = data;
-    });
+  constructor(private wcsService: WcsService) {
    }
 
   ngOnInit() {
-    
+    this.wcsService.getScreenData().subscribe(data => {
+      this.data = data;
+    });
   }
 
   data = [];
