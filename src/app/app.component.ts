@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { catchError, filter, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { StartupService } from './startup.service';
+import { UpdateType } from './classes/update-type';
 
 const ws: WebSocketSubject<any> = webSocket('ws://localhost:3000');
 
@@ -30,8 +31,12 @@ export class AppComponent implements OnInit {
     console.log(this.startup.startupData);
 
     // subscribe to messages
-    ws.pipe(filter(resp => resp.message.screen === this.router.url), map(resp => resp.message)).subscribe(message => {
-      this.wcsService.getScreenData().subscribe();
+    ws.pipe(map(resp => resp.message)).subscribe(message => {
+      switch (message.type as UpdateType) {
+        case UpdateType.HOME:
+          this.wcsService.getScreenData().subscribe();
+      }
+
       console.log(message);
     }, error => {
       console.log(error);

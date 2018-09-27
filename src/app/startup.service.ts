@@ -21,7 +21,7 @@ export class StartupService {
         .toPromise();
     }
 
-    get startupData(): any {
+    get startupData(): AppSettings {
         return this._startupData;
     }
 }

@@ -41,7 +41,8 @@ export class WcsService {
 
   sendStatus(): Observable<any> {
     let retries = 0;
-    return interval(this.startup.startupData * 1000).pipe(switchMap(() => {
+    const delay = this.startup.startupData.statusInterval * 1000;
+    return interval(delay).pipe(switchMap(() => {
       return this.http.get(`${this.startup.startupData.wcsURL}/update-status?screen=${this.router.url}`)
       .pipe(tap(() => retries = 0), catchError(s => {
         retries++;
