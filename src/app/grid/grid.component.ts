@@ -11,17 +11,14 @@ export class GridComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    
-  }
-
   @Input() data = [];
   @Input() columns = [];
-
   showGoodCases = true;
   showErrorCases = false;
 
-  gridApi: GridApi
+  gridApi: GridApi;
+
+  ngOnInit() {  }
 
   onGridReady($event) {
     this.gridApi = $event.api;

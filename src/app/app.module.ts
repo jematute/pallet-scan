@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,11 @@ import { IoMonitorModule } from './io-monitor/io-monitor.module';
 import { UserSetupModule } from './user-setup/user-setup.module';
 import { WcsService } from './wcs.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { StartupService } from './startup.service';
+
+export function startupServiceFactory(startupService: StartupService): Function {
+  return () => startupService.load();
+}
 
 @NgModule({
   declarations: [
@@ -31,7 +36,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     UserSetupModule,
     HttpClientModule
   ],
-  providers: [ WcsService, HttpClient ],
+  providers: [ WcsService, HttpClient, StartupService,
+    {
+        // Provider for APP_INITIALIZER
+        provide: APP_INITIALIZER,
+        useFactory: startupServiceFactory,
+        deps: [StartupService],
+        multi: true
+    } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

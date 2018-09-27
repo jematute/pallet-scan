@@ -6,6 +6,7 @@ import { WcsService } from './wcs.service';
 import { Router } from '@angular/router';
 import { catchError, filter, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { StartupService } from './startup.service';
 
 const ws: WebSocketSubject<any> = webSocket('ws://localhost:3000');
 
@@ -14,25 +15,28 @@ const ws: WebSocketSubject<any> = webSocket('ws://localhost:3000');
   animations: [ routerTransition, fadeAnimation ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less'],
-  
+
 })
 export class AppComponent implements OnInit {
 
-  constructor(private wcsService: WcsService, private router: Router) {
-
+  constructor(private wcsService: WcsService, private router: Router, private startup: StartupService) {
   }
-  
+
   private serverMessages = [];
+  title = 'pallet-scan';
 
   ngOnInit(): void {
-    //subscribe to messages
+
+    console.log(this.startup.startupData);
+
+    // subscribe to messages
     ws.pipe(filter(resp => resp.message.screen === this.router.url), map(resp => resp.message)).subscribe(message => {
       this.wcsService.getScreenData().subscribe();
       console.log(message);
     }, error => {
       console.log(error);
     }, () => {
-      console.warn("Completed");
+      console.warn('Completed');
     });
 
     // send heartbeat to server
@@ -42,7 +46,6 @@ export class AppComponent implements OnInit {
     })).subscribe();
 
   }
-  title = 'pallet-scan';
   getState(outlet) {
     return outlet.activatedRouteData.state;
   }
