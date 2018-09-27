@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Environment } from './classes/environment';
 import { tap, switchMap, catchError, map } from 'rxjs/operators';
@@ -15,6 +15,7 @@ export class WcsService {
   systemReady = true;
   screenData: any;
   constructor(private http: HttpClient, private router: Router) { }
+  onDataUpdate = new EventEmitter<any>();
 
   startPalletScan(): Observable<any> {
     return this.http.get(Environment.wcsURL + `/start-pallet-scan?userId=${this.userId}`).pipe(tap(resp => {
@@ -57,6 +58,7 @@ export class WcsService {
     else {
       return this.http.get(`${Environment.wcsURL}/screen-data?screen=${this.router.url}`)
       .pipe(tap(resp => {
+        this.onDataUpdate.emit(resp);
         this.screenData = resp;
       }));
     }

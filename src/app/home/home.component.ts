@@ -17,6 +17,10 @@ export class HomeComponent implements OnInit {
     this.wcsService.getScreenData().subscribe(data => {
       this.data = data as Case[];
     });
+
+    this.wcsService.onDataUpdate.subscribe(data => {
+      this.data = data as Case[];
+    })
   }
 
   data: Case[];

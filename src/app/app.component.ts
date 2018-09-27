@@ -4,7 +4,7 @@ import { WebSocketSubject, webSocket } from 'rxjs/websocket';
 import { ServerMessage } from './classes/server-message';
 import { WcsService } from './wcs.service';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
+import { catchError, filter, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 const ws: WebSocketSubject<any> = webSocket('ws://localhost:3000');
@@ -26,7 +26,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     //subscribe to messages
-    ws.subscribe(message => {
+    ws.pipe(filter(resp => resp.message.screen === this.router.url), map(resp => resp.message)).subscribe(message => {
+      this.wcsService.getScreenData().subscribe();
       console.log(message);
     }, error => {
       console.log(error);
