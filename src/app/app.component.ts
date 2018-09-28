@@ -10,7 +10,7 @@ import { StartupService } from './startup.service';
 import { UpdateType } from './classes/update-type';
 import { NavbarService } from './navbar/navbar.service';
 
-const ws: WebSocketSubject<any> = webSocket('ws://localhost:3000');
+
 
 @Component({
   selector: 'app-root',
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     console.log(this.startup.startupData);
-
+    const ws: WebSocketSubject<any> = webSocket(`${this.startup.startupData.wcsWSURL}`);
     // subscribe to messages
     ws.pipe(map(resp => resp.message)).subscribe(message => {
       switch (message.type) {
