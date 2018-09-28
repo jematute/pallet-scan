@@ -35,16 +35,18 @@ export class NavbarComponent implements OnInit {
       autoAccept: true,
       accepted: (event, keyboard, el) => {
         if (keyboard.$preview.val().length < 2 || keyboard.$preview.val().length > 10) {
-          this.wcsService.userId = '';
-          
+          this.wcsService.userId = '';      
         } else {
-          this.wcsService.userId = keyboard.$preview.val();
           this.navService.sendLoginData(this.wcsService.userId);
         }
       }
     });
     interval(1000).subscribe(() => {
       this.date = this.getCurrentDate();
+    });
+
+    this.navService.onEvent.subscribe(resp => {
+      this.text = resp;
     });
   }
 
