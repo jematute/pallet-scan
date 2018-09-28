@@ -8,6 +8,7 @@ import { catchError, filter, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { StartupService } from './startup.service';
 import { UpdateType } from './classes/update-type';
+import { NavbarService } from './navbar/navbar.service';
 
 const ws: WebSocketSubject<any> = webSocket('ws://localhost:3000');
 
@@ -20,7 +21,7 @@ const ws: WebSocketSubject<any> = webSocket('ws://localhost:3000');
 })
 export class AppComponent implements OnInit {
 
-  constructor(private wcsService: WcsService, private router: Router, private startup: StartupService) {
+  constructor(private navbarService: NavbarService, private wcsService: WcsService, private router: Router, private startup: StartupService) {
   }
 
   private serverMessages = [];
@@ -32,9 +33,9 @@ export class AppComponent implements OnInit {
 
     // subscribe to messages
     ws.pipe(map(resp => resp.message)).subscribe(message => {
-      switch (message.type as UpdateType) {
-        case UpdateType.HOME:
-          this.wcsService.getScreenData().subscribe();
+      switch (message.type) {
+        case "userupdate":
+          this.navbarService.getLoginBoxData();
       }
 
       console.log(message);

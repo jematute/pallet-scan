@@ -6,12 +6,14 @@ import { RouterModule } from '@angular/router';
 import {DropdownModule} from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import { NavbarService } from './navbar.service';
 
 @NgModule({
   imports: [
     CommonModule, ButtonModule, RouterModule, DropdownModule, FormsModule, AutoCompleteModule
   ],
   exports: [ NavbarComponent ],
-  declarations: [NavbarComponent]
+  declarations: [NavbarComponent],
+  providers: [ NavbarService ]
 })
 export class NavbarModule { }

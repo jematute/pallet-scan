@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { getLocaleDateTimeFormat } from '@angular/common';
 import { interval } from 'rxjs';
-import {SelectItem} from 'primeng/api';
 import { Router } from '@angular/router';
 import { WcsService } from '../wcs.service';
+import { NavbarService } from './navbar.service';
 
 declare var $;
 
@@ -14,7 +13,7 @@ declare var $;
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public router: Router, public wcsService: WcsService) {
+  constructor(public navService: NavbarService, public router: Router, public wcsService: WcsService) {
     this.user = this.logins[0];
     this.date = this.getCurrentDate();
     this.logins = [
@@ -23,7 +22,7 @@ export class NavbarComponent implements OnInit {
       {label: 'Test2', value: {id: 3, name: 'Test2', code: 'LDN'}},
       {label: 'Test3', value: {id: 4, name: 'Test3', code: 'IST'}},
       {label: 'Test4', value: {id: 5, name: 'Test4', code: 'PRS'}}
-  ];
+    ];
   }
   text = 'MSmith';
   user: any;
@@ -37,15 +36,16 @@ export class NavbarComponent implements OnInit {
       accepted: (event, keyboard, el) => {
         if (keyboard.$preview.val().length < 2 || keyboard.$preview.val().length > 10) {
           this.wcsService.userId = '';
+          
         } else {
           this.wcsService.userId = keyboard.$preview.val();
+          this.navService.sendLoginData(this.wcsService.userId);
         }
       }
     });
     interval(1000).subscribe(() => {
       this.date = this.getCurrentDate();
     });
-
   }
 
   getCurrentDate() {
