@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
     const ws: WebSocketSubject<any> = webSocket(`${this.startup.startupData.wcsWSURL}`);
     // subscribe to messages
     ws.pipe(map(resp => resp.message)).subscribe(message => {
-      switch (message) {
+      switch (message.type) {
         case "userupdate":
           this.navbarService.getLoginBoxData();
       }

@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
         if (keyboard.$preview.val().length < 2 || keyboard.$preview.val().length > 10) {
           this.wcsService.userId = '';      
         } else {
-          this.navService.sendLoginData(this.navService.loginId);
+          this.navService.sendLoginData(keyboard.$preview.val());
         }
       }
     });
