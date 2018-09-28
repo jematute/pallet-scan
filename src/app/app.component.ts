@@ -46,10 +46,10 @@ export class AppComponent implements OnInit {
     });
 
     // send heartbeat to server
-    this.wcsService.sendStatus().pipe(catchError(s => {
-      alert(s);
-      return s;
-    })).subscribe();
+    // this.wcsService.sendStatus().pipe(catchError(s => {
+    //   alert(s);
+    //   return s;
+    // })).subscribe();
 
   }
   getState(outlet) {
