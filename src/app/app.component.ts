@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeAnimation, routerTransition } from './router.animations';
 import { WebSocketSubject, webSocket } from 'rxjs/websocket';
-import { ServerMessage } from './classes/server-message';
 import { WcsService } from './wcs.service';
 import { Router } from '@angular/router';
 import { catchError, filter, map } from 'rxjs/operators';
@@ -9,6 +8,7 @@ import { throwError } from 'rxjs';
 import { StartupService } from './startup.service';
 import { UpdateType } from './classes/update-type';
 import { NavbarService } from './navbar/navbar.service';
+import { ServerMessagesService } from './server-messages.service';
 
 
 
@@ -21,8 +21,10 @@ import { NavbarService } from './navbar/navbar.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private navbarService: NavbarService, private wcsService: WcsService, private router: Router, private startup: StartupService) {
-  }
+  constructor(private navbarService: NavbarService,
+    private startup: StartupService,
+    private serverMessage: ServerMessagesService
+    ) {}
 
   private serverMessages = [];
   title = 'pallet-scan';
@@ -30,21 +32,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     console.log(this.startup.startupData);
-    const ws: WebSocketSubject<any> = webSocket(`${this.startup.startupData.wcsWSURL}`);
-    // subscribe to messages
-    ws.pipe(map(resp => resp.message)).subscribe(message => {
-      switch (message.type) {
-        case "userupdate":
-          this.navbarService.getLoginBoxData();
-      }
 
-      console.log(message);
-    }, error => {
-      console.log(error);
-    }, () => {
-      console.warn('Completed');
-    });
-
+    this.serverMessage.startListening();
     // send heartbeat to server
     // this.wcsService.sendStatus().pipe(catchError(s => {
     //   alert(s);

@@ -1,9 +1,7 @@
 export interface ServerMessage {
-    type: MessageType,
-    message: string,
+    type: MessageType;
 }
 
 export enum MessageType {
-    GETCASEDATA,
-    GETALARM,
+    USERUPDATE,
 }
