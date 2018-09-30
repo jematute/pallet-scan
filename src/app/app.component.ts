@@ -21,9 +21,10 @@ import { ServerMessagesService } from './server-messages.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private navbarService: NavbarService,
+  constructor(private wcsService: WcsService,
     private startup: StartupService,
-    private serverMessage: ServerMessagesService
+    private serverMessage: ServerMessagesService,
+    private router: Router
     ) {}
 
   private serverMessages = [];
@@ -35,10 +36,10 @@ export class AppComponent implements OnInit {
 
     this.serverMessage.startListening();
     // send heartbeat to server
-    // this.wcsService.sendStatus().pipe(catchError(s => {
-    //   alert(s);
-    //   return s;
-    // })).subscribe();
+    this.wcsService.changeScreen(this.router.url).pipe(catchError(s => {
+      alert(s);
+      return s;
+    })).subscribe();
 
   }
   getState(outlet) {

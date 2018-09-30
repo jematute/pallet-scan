@@ -23,7 +23,6 @@ export class GridComponent implements OnInit {
   onGridReady($event) {
     this.gridApi = $event.api;
     this.gridApi.sizeColumnsToFit();
-    console.log($event);
   }
 
 }

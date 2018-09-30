@@ -36,7 +36,16 @@ export class WcsService {
   }
 
   changeScreen(url: string): Observable<any> {
-    return this.http.get(`${this.startup.startupData.wcsURL}/change-screen?screen=${url}`);
+      const screenMap = new Map();
+      screenMap.set("/home", "Home");
+      screenMap.set("/case-history", "Case History");
+      screenMap.set("/alarm-history", "Alarm History");
+      screenMap.set('/io-monitor', "I/O Monitor");
+      screenMap.set('/user-setup', 'User Setup');
+
+      const screen = encodeURIComponent(screenMap.get(url));
+
+    return this.http.get(`${this.startup.startupData.wcsURL}/change-screen?screen=${screen}`);
   }
 
   sendStatus(): Observable<any> {
@@ -58,7 +67,7 @@ export class WcsService {
     if (this.router.url === '/') {
       return of(true);
     } else {
-      return this.http.get(`${this.startup.startupData.wcsURL}/screen-data?screen=${this.router.url}`)
+      return this.http.get(`${this.startup.startupData.wcsURL}/hmigetcasedata`)
       .pipe(tap(resp => {
         this.onDataUpdate.emit(resp);
         this.screenData = resp;

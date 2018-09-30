@@ -1,31 +1,46 @@
 import { Injectable } from '@angular/core';
-import { WebSocketSubject, webSocket } from 'rxjs/websocket';
 import { StartupService } from './startup.service';
-import { map, retryWhen, flatMap } from 'rxjs/operators';
 import { NavbarService } from './navbar/navbar.service';
-import { ServerMessage, MessageType } from './classes/server-message';
-import { interval, throwError, of } from 'rxjs';
+import ReconnectingWebSocket from 'reconnecting-websocket';
+import { WcsService } from './wcs.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServerMessagesService {
 
-  constructor(private startup: StartupService, private navbar: NavbarService) {
+  constructor(private wcsService: WcsService, private startup: StartupService, private navbar: NavbarService) {
   }
 
   connectToWebSocket() {
-    const ws: WebSocketSubject<any> = webSocket(`${this.startup.startupData.wcsWSURL}`);
-    return ws;
+  
   }
 
   startListening() {
+    const rws = new ReconnectingWebSocket(this.startup.startupData.wcsWSURL);
+    rws.addEventListener('open', () => {
+      console.log("opened websocket");
+    });
+
+    rws.addEventListener('message', resp => {
+      const response = resp as any;
+      const data = JSON.parse(response.data);
+      switch (data.message.type) {
+        case "userupdate":
+          this.navbar.onUpdateLoginBox.emit(data.message);
+          break;
+        case "casedataupdate": 
+          this.wcsService.getScreenData().subscribe();
+          break;
+      }
+    });
+
     // // subscribe to messages
     // ws.pipe(map(resp => resp.message), retryWhen(_ => {
     //   return interval(2000).pipe(flatMap(count => {
     //     if (count === 10) {
     //       throwError('giving up');
-    //     } else {
+    //     } else {> 
     //       return of(count);
     //     }
     //   }));

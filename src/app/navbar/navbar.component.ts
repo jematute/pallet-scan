@@ -14,21 +14,13 @@ declare var $;
 export class NavbarComponent implements OnInit {
 
   constructor(public navService: NavbarService, public router: Router, public wcsService: WcsService) {
-    this.user = this.logins[0];
-    this.date = this.getCurrentDate();
-    this.logins = [
-      {label: 'MSmith', value: {id: 1, name: 'MSmith', code: 'MS'}},
-      {label: 'Test1', value: {id: 2, name: 'Test1', code: 'RM'}},
-      {label: 'Test2', value: {id: 3, name: 'Test2', code: 'LDN'}},
-      {label: 'Test3', value: {id: 4, name: 'Test3', code: 'IST'}},
-      {label: 'Test4', value: {id: 5, name: 'Test4', code: 'PRS'}}
-    ];
+    this.date = this.getCurrentDate();    
   }
-  text = 'MSmith';
-  user: any;
-  results = [];
+
+  loginId = "";
+  loginBoxFontColor = "rbg(0,0,0)";
+  loginBoxBackgrodundColor = "rbg(255,255,255)";
   date: any;
-  logins = [];
 
   ngOnInit() {
     $('#keyboard').keyboard({
@@ -41,12 +33,16 @@ export class NavbarComponent implements OnInit {
         }
       }
     });
+
+    // keeps date on screen updated
     interval(1000).subscribe(() => {
       this.date = this.getCurrentDate();
     });
 
-    this.navService.onEvent.subscribe(resp => {
-      this.text = resp;
+    this.navService.onUpdateLoginBox.subscribe(message => {
+      this.loginId = message.data;
+      this.loginBoxFontColor = message.textColor;
+      this.loginBoxBackgrodundColor = message.backgroundColor;
     });
   }
 
@@ -68,10 +64,5 @@ export class NavbarComponent implements OnInit {
     const keyboard = $('#keyboard').getkeyboard();
     keyboard.reveal();
   }
-
-  onBlur() {
-
-  }
-
 
 }

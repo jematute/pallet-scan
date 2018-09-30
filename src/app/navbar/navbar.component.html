@@ -10,7 +10,9 @@
     <div class="right-align">
         <div class="login-info">
             <span>User Login</span>
-            <input (focus)="onFocus()" placeholder="not logged in" [(ngModel)]="navService.loginId">
+            <input maxlength="10" (focus)="onFocus()" 
+            [ngStyle]="{'background-color': loginBoxBackgrodundColor, 'color': loginBoxFontColor }" 
+            placeholder="not logged in" [(ngModel)]="loginId">
             <input type="text" style="display: none" id="keyboard">
         </div>
         <div class="date">
