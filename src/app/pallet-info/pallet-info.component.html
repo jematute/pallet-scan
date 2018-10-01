@@ -1,52 +1,55 @@
 <div class="pallet-info">
   <div>
     <span>Pallet Scan</span>
-    <div class="status">
-      {{status}}
+    <div [ngStyle]="{ 'background-color': palletScanBackgroundColor, 'color': palletScanTextColor }" class="status">
+      {{palletScan}}
     </div>
   </div>
   <div class="data-line">
     <div class="data-el">
       <span>Pallet Id</span>
-      <div class="data-box">
+      <div [ngStyle]="{ 'background-color': palletIdBackgroundColor, 'color': palletIdTextColor }" class="data-box">
         {{palletId}}
       </div>
     </div>
     <div class="data-el">
       <span>Pallet Status</span>
-      <div class="data-box">
+      <div [ngStyle]="{ 'background-color': palletStatusBackgroundColor, 'color': palletStatusTextColor }" class="data-box">
         {{palletStatus}}
       </div>
     </div>
     <div class="data-el">
       <span>Wrap Enable</span>
-      <input [(ngModel)]="wrapEnable" (focus)="onWrapEnabledFocus()" type="text" class="wrap-enable">
+      <input [ngStyle]="{ 'background-color': wrapEnableBackgroundColor, 'color': wrapEnableTextColor }" 
+      [(ngModel)]="wrapEnable" (focus)="onWrapEnabledFocus()" type="text" class="wrap-enable">
       <input style="display: none" id="keyboard-wrapenable" type="text">
     </div>
 
   </div>
   <div class="alarm">
     <span>Alarms</span>
-    <div class="alarm-box"></div>
+    <div class="alarm-box">
+      <app-grid [data]="alarmData" [columns]="columnDefs"></app-grid>
+    </div>
   </div>
   <div class="system">
     <span>System</span>
-    <div class="status">
+    <div [ngStyle]="{ 'background-color': systemBackgroundColor, 'color': systemEnableTextColor }" class="status">
       {{system}}
     </div>
   </div>
 
   <div class="controls">
-    <div class="circle-button green">
+    <div class="circle-button"
+      [ngStyle]="{ 'background-color': startButtonBackgroundColor, 'color': startButtonTextColor, 'border-color': startButtonBorderColor }">
       <div (click)="start()" class="button-area"></div>
       <div *ngIf="wcsService.started || wcsService.userId.length === 0 || !wcsService.systemReady" class="disable-overlay"></div>
-      <span>Start</span>
-      <span>Scan</span>
+      <span>{{startButton}}</span>
     </div>
-    <div class="circle-button red">
+    <div class="circle-button"
+    [ngStyle]="{ 'background-color': stopButtonBackgroundColor, 'color': stopButtonTextColor, 'border-color': stopButtonBorderColor }">
       <div (click)="stop()" class="button-area"></div>
-      <span>Stop</span>
-      <span>Scan</span>
+      <span>{{stopButton}}</span>
     </div>
 
   </div>

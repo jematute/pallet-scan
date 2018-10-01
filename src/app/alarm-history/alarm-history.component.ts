@@ -14,17 +14,32 @@ export class AlarmHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.wcsService.getScreenData().subscribe(data => {
-      this.data = data;
-    });
+    this.wcsService.onAlarmGridUpdate.subscribe(resp => {
+      this.data = resp;
+    })
   }
 
   data = [];
 
   columnDefs = [
-    {headerName: 'Unit', field: 'unit' },
-    {headerName: 'Alarm', field: 'alarm' },
-    {headerName: 'TimeStamp', field: 'timeStamp'},
+    {headerName: 'Unit', field: 'unit.data', cellStyle: (param) => {
+      return this.setCellStyle('unit', param);
+    }},
+    {headerName: 'Alarm', field: 'alarm.data', cellStyle: (param) => {
+      return this.setCellStyle('alarm', param);
+    }},
+    {headerName: 'TimeStamp', field: 'timestamp.data', cellStyle: (param) => {
+      return this.setCellStyle('timestamp', param);
+    }},
   ];
+
+  setCellStyle(columnName: string, param: any) {
+    const background = param.data[columnName].backgroundColor;
+    const color = param.data[columnName].textColor; 
+    return {
+      'background-color': background,
+      'color': color
+    }
+  }
 
 }

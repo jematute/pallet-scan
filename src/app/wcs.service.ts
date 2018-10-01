@@ -1,10 +1,31 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Environment } from './classes/environment';
-import { tap, switchMap, catchError, map } from 'rxjs/operators';
-import { Observable, interval, of, throwError } from 'rxjs';
-import { Router } from '@angular/router';
-import { StartupService } from './startup.service';
+import {
+  Injectable,
+  EventEmitter
+} from '@angular/core';
+import {
+  HttpClient
+} from '@angular/common/http';
+import {
+  Environment
+} from './classes/environment';
+import {
+  tap,
+  switchMap,
+  catchError,
+  map
+} from 'rxjs/operators';
+import {
+  Observable,
+  interval,
+  of ,
+  throwError
+} from 'rxjs';
+import {
+  Router
+} from '@angular/router';
+import {
+  StartupService
+} from './startup.service';
 
 
 @Injectable({
@@ -16,10 +37,19 @@ export class WcsService {
   started = false;
   systemReady = true;
   screenData: any;
-  constructor(private http: HttpClient, private router: Router, private startup: StartupService) { }
-  onDataUpdate = new EventEmitter<any>();
+  constructor(private http: HttpClient, private router: Router, private startup: StartupService) {}
+  onDataUpdate = new EventEmitter < any > ();
+  onPalletIdUpdate = new EventEmitter < any > ();
+  onPalletScanUpdate = new EventEmitter < any > ();
+  onPalletStatusUpdate = new EventEmitter < any > ();
+  onWrapEnableUpdate = new EventEmitter < any > ();
+  onAlarmGridUpdate = new EventEmitter < any > ();
+  onSystemStatusUpdate = new EventEmitter<any>();
+  onStartButtonUpdate = new EventEmitter<any>();
+  onStopButtonUpdate = new EventEmitter<any>();
+  onIODataUpdate = new EventEmitter<any>();
 
-  startPalletScan(): Observable<any> {
+  startPalletScan(): Observable < any > {
     return this.http.get(this.startup.startupData.wcsURL + `/start-pallet-scan?userId=${this.userId}`).pipe(tap(resp => {
       this.started = true;
     }, error => {
@@ -27,7 +57,7 @@ export class WcsService {
     }));
   }
 
-  stopPalletScan(): Observable<any> {
+  stopPalletScan(): Observable < any > {
     return this.http.get(this.startup.startupData.wcsURL + `/stop-pallet-scan?userId=${this.userId}`).pipe(tap(resp => {
       this.started = false;
     }, error => {
@@ -35,46 +65,97 @@ export class WcsService {
     }));
   }
 
-  changeScreen(url: string): Observable<any> {
-      const screenMap = new Map();
-      screenMap.set("/home", "Home");
-      screenMap.set("/case-history", "Case History");
-      screenMap.set("/alarm-history", "Alarm History");
-      screenMap.set('/io-monitor', "I/O Monitor");
-      screenMap.set('/user-setup', 'User Setup');
+  changeScreen(url: string): Observable < any > {
+    const screenMap = new Map();
+    screenMap.set("/home", "Home");
+    screenMap.set("/case-history", "Case History");
+    screenMap.set("/alarm-history", "Alarm History");
+    screenMap.set('/io-monitor', "I/O Monitor");
+    screenMap.set('/user-setup', 'User Setup');
 
-      const screen = encodeURIComponent(screenMap.get(url));
-
-    return this.http.get(`${this.startup.startupData.wcsURL}/change-screen?screen=${screen}`);
+    const screen = encodeURIComponent(screenMap.get(url));
+    if (screen)
+      return this.http.get(`${this.startup.startupData.wcsURL}/change-screen?screen=${screen}`);
+    else
+      return of(true);
   }
 
-  sendStatus(): Observable<any> {
+  sendStatus(): Observable < any > {
     let retries = 0;
     const delay = this.startup.startupData.statusInterval * 1000;
     return interval(delay).pipe(switchMap(() => {
       return this.http.get(`${this.startup.startupData.wcsURL}/update-status?screen=${this.router.url}`)
-      .pipe(tap(() => retries = 0), catchError(s => {
-        retries++;
-        if (retries > 100) {
-          return throwError('failed to reach server');
-        }
-        return of(true);
-      }));
+        .pipe(tap(() => retries = 0), catchError(s => {
+          retries++;
+          if (retries > 100) {
+            return throwError('failed to reach server');
+          }
+          return of(true);
+        }));
     }));
   }
 
-  getScreenData(): Observable<any> {
-    if (this.router.url === '/') {
-      return of(true);
-    } else {
-      return this.http.get(`${this.startup.startupData.wcsURL}/hmigetcasedata`)
+  getCaseData(): Observable < any > {
+    return this.http.get(`${this.startup.startupData.wcsURL}/hmigetcasedata`)
       .pipe(tap(resp => {
         this.onDataUpdate.emit(resp);
-        this.screenData = resp;
       }));
-    }
-
   }
+
+  toggleGoodCases(value: boolean) {
+    return this.http.get(`${this.startup.startupData.wcsURL}/casetableshowgoodcases?data=${value}`);
+  }
+
+  toggleErrorCases(value: boolean) {
+    return this.http.get(`${this.startup.startupData.wcsURL}/casetableshowerrorcases?data=${value}`);
+  }
+
+  palletIdUpdate(data: any) {
+    this.onPalletIdUpdate.emit(data);
+  }
+
+  palletScanUpdate(data: any) {
+    this.onPalletScanUpdate.emit(data);
+  }
+
+  palletStatusUpdate(data: any) {
+    this.onPalletStatusUpdate.emit(data);
+  }
+
+  wrapEnable(user: string) {
+    return this.http.get(`${this.startup.startupData.wcsURL}/eventwrapenable?user=${user}`);
+  }
+
+  wrapEnableUpdate(data: any) {
+    this.onWrapEnableUpdate.emit(data);
+  }
+
+  systemStatusUpdate(data: any) {
+    this.onSystemStatusUpdate.emit(data);
+  }
+
+  startButtonUpdate(data: any) {
+    this.onStartButtonUpdate.emit(data);
+  }
+
+  stopButtonUpdate(data: any) {
+    this.onStopButtonUpdate.emit(data);
+  }
+
+  getAlarmData(): Observable < any > {
+    return this.http.get(`${this.startup.startupData.wcsURL}/hmigetalarmdata`)
+        .pipe(tap(resp => {
+          this.onAlarmGridUpdate.emit(resp);
+    }));
+  }
+
+  getIOData(): Observable < any > {
+    return this.http.get(`${this.startup.startupData.wcsURL}/hmigetiodata`)
+        .pipe(tap(resp => {
+          this.onIODataUpdate.emit(resp);
+    }));
+  }
+
 
 
 }

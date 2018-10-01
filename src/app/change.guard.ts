@@ -16,9 +16,12 @@ export class ChangeGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      return this.wcsService.changeScreen(state.url).pipe(catchError(s => {
-        alert("could not reach server");
-        return of(true);
-      }));
+      if (state.url !== '/' && state.url) {
+        return this.wcsService.changeScreen(state.url).pipe(catchError(s => {
+          alert("could not reach server");
+          return of(true);
+        }));
+      }
+      return of (true);
   } 
 }

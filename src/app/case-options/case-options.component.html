@@ -1,4 +1,4 @@
 <div class="case-options">
-    <p-checkbox [(ngModel)]="showGoodCases" binary="true" label="Show Good Cases"></p-checkbox>
-    <p-checkbox [(ngModel)]="showErrorCases" binary="true" label="Show Error Cases"></p-checkbox>
+    <p-checkbox (onChange)="onShowGoodCasesClicked($event)" [(ngModel)]="showGoodCases" binary="true" label="Show Good Cases"></p-checkbox>
+    <p-checkbox (onChange)="onShowErrorCasesClicked($event)" [(ngModel)]="showErrorCases" binary="true" label="Show Error Cases"></p-checkbox>
 </div>

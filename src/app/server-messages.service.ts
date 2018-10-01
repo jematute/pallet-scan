@@ -19,18 +19,50 @@ export class ServerMessagesService {
   startListening() {
     const rws = new ReconnectingWebSocket(this.startup.startupData.wcsWSURL);
     rws.addEventListener('open', () => {
-      console.log("opened websocket");
+      console.log('opened websocket');
     });
 
     rws.addEventListener('message', resp => {
       const response = resp as any;
       const data = JSON.parse(response.data);
       switch (data.message.type) {
-        case "userupdate":
+        case 'userupdate':
           this.navbar.onUpdateLoginBox.emit(data.message);
           break;
-        case "casedataupdate": 
-          this.wcsService.getScreenData().subscribe();
+        case 'casedataupdate': 
+          this.wcsService.getCaseData().subscribe();
+          break;
+        case 'palletscanupdate':
+          this.wcsService.palletScanUpdate(data.message);
+          break;
+        case 'palletidupdate':
+          this.wcsService.palletIdUpdate(data.message);
+          break;
+        case 'palletstatusupdate':
+          this.wcsService.palletStatusUpdate(data.message);
+          break;
+        case 'wrapenableupdate':
+          this.wcsService.wrapEnableUpdate(data.message);
+        case 'alarmgridupdate':
+          this.wcsService.getAlarmData().subscribe();
+          break;
+        case 'systemstatusupdate':
+          this.wcsService.systemStatusUpdate(data.message);
+          break;
+        case 'startbuttonupdate':
+          this.wcsService.startButtonUpdate(data.message);
+          break;
+        case 'stopbuttonupdate':
+          this.wcsService.stopButtonUpdate(data.message);
+          break;
+        case 'casehistoryupdate':
+          this.wcsService.getCaseData().subscribe();
+          break;
+        case 'alarmhistorygridupdate':
+          this.wcsService.getAlarmData().subscribe();
+          break;
+        case 'iodataupdate':
+          this.wcsService.getIOData().subscribe();
           break;
       }
     });

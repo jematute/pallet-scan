@@ -13,8 +13,8 @@ export class IoMonitorComponent implements OnInit {
   data: IOData;
 
   ngOnInit() {
-    this.wcsService.getScreenData().subscribe(data => {
-      this.data = data;
+    this.wcsService.onIODataUpdate.subscribe(resp => {
+      this.data = resp;
     });
   }
 }

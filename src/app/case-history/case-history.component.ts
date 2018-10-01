@@ -13,20 +13,43 @@ export class CaseHistoryComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.wcsService.getScreenData().subscribe(data => {
-      this.data = data;
+    this.wcsService.onDataUpdate.subscribe(resp => {
+      this.data = resp;
     });
   }
 
   data = [];
   columnDefs = [
-    {headerName: 'Case Barcode', field: 'barcode' },
-    {headerName: 'Case Status', field: 'status' },
-    {headerName: 'Load ID', field: 'loadId'},
-    {headerName: 'Pallet Status', field: 'palletStatus' },
-    {headerName: 'Pallet ID', field: 'palletId'},
-    {headerName: 'User', field: 'user'},
-    {headerName: 'Manual Wrap', field: 'manualWrap'},
+    {headerName: 'Case Barcode', field: 'barcode.data',cellStyle: (param) => {
+      return this.setCellStyle('barcode', param);
+    }},
+    {headerName: 'Case Status', field: 'status.data', cellStyle: (param) => {
+      return this.setCellStyle('status', param);
+    }},
+    {headerName: 'Load ID', field: 'loadId.data', cellStyle: (param) => {
+      return this.setCellStyle('loadId', param);
+    }},
+    {headerName: 'Pallet Status', field: 'palletStatus.data', cellStyle: (param) => {
+      return this.setCellStyle('palletStatus', param);
+    }},
+    {headerName: 'Pallet ID', field: 'palletId.data', cellStyle: (param) => {
+      return this.setCellStyle('palletId', param);
+    }},
+    {headerName: 'User', field: 'user.data', cellStyle: (param) => {
+      return this.setCellStyle('user', param);
+    }},
+    {headerName: 'Manual Wrap', field: 'manualWrap.data', cellStyle: (param) => {
+      return this.setCellStyle('manualWrap', param);
+    }},
   ];
+
+  setCellStyle(columnName: string, param: any) {
+    const background = param.data[columnName].backgroundColor;
+    const color = param.data[columnName].textColor; 
+    return {
+      'background-color': background,
+      'color': color
+    }
+  }
 
 }

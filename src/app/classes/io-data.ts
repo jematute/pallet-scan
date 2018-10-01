@@ -1,11 +1,11 @@
 export interface IOData {
-    wrapperReady: boolean,
-    turnTableRotating: boolean,
-    turnTableHomeProx: boolean,
-    eStopActive: boolean,
-    rotateCommand: boolean,
-    disableWrapping: boolean,
-    wrapStart: boolean,
-    redBeacon: boolean,
-    greanBeacon: boolean
+    wrapperReady: string,
+    turnTableRotating: string,
+    turnTableHomeProx: string,
+    eStopActive: string,
+    rotateCommand: string,
+    disableWrapping: string,
+    wrapStart: string,
+    redBeacon: string,
+    greanBeacon: string
 }
