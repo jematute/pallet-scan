@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   private serverMessages = [];
   title = 'pallet-scan';
 
-  showPopup = true;
+  showPopup = false;
   popupData = {
     type: 'popup',
     data: 'the retro encablulator fluid is low',
