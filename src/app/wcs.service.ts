@@ -26,6 +26,7 @@ import {
 import {
   StartupService
 } from './startup.service';
+import { User } from './classes/user';
 
 
 @Injectable({
@@ -48,9 +49,10 @@ export class WcsService {
   onStartButtonUpdate = new EventEmitter<any>();
   onStopButtonUpdate = new EventEmitter<any>();
   onIODataUpdate = new EventEmitter<any>();
+  onUserDataUpdate = new EventEmitter<any>();
 
   startPalletScan(): Observable < any > {
-    return this.http.get(this.startup.startupData.wcsURL + `/start-pallet-scan?userId=${this.userId}`).pipe(tap(resp => {
+    return this.http.get(this.startup.startupData.wcsURL + `/startscan`).pipe(tap(resp => {
       this.started = true;
     }, error => {
       console.log(error);
@@ -58,7 +60,7 @@ export class WcsService {
   }
 
   stopPalletScan(): Observable < any > {
-    return this.http.get(this.startup.startupData.wcsURL + `/stop-pallet-scan?userId=${this.userId}`).pipe(tap(resp => {
+    return this.http.get(this.startup.startupData.wcsURL + `/stopscan`).pipe(tap(resp => {
       this.started = false;
     }, error => {
       console.log(error);
@@ -153,6 +155,23 @@ export class WcsService {
     return this.http.get(`${this.startup.startupData.wcsURL}/hmigetiodata`)
         .pipe(tap(resp => {
           this.onIODataUpdate.emit(resp);
+    }));
+  }
+
+
+  getUserData(): Observable<User[]> {
+    return this.http.get(`${this.startup.startupData.wcsURL}/hmigetusersetupdata`)
+    .pipe(map(resp => resp as User[]), tap(users => {
+      this.onUserDataUpdate.emit(users);
+    }));
+  }
+
+  userUpdate(data: any) {
+    return this.http.post(`${this.startup.startupData.wcsURL}/userupdateapply`, JSON.stringify(data), { 
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .pipe(switchMap(() => {
+      return this.getUserData();
     }));
   }
 

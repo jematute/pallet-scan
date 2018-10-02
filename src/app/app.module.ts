@@ -14,6 +14,8 @@ import { UserSetupModule } from './user-setup/user-setup.module';
 import { WcsService } from './wcs.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { StartupService } from './startup.service';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 export function startupServiceFactory(startupService: StartupService): Function {
   return () => startupService.load();
@@ -34,7 +36,9 @@ export function startupServiceFactory(startupService: StartupService): Function 
     AlarmHistoryModule,
     IoMonitorModule,
     UserSetupModule,
-    HttpClientModule
+    HttpClientModule,
+    DialogModule,
+    ButtonModule
   ],
   providers: [ WcsService, HttpClient, StartupService,
     {

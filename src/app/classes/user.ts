@@ -1,5 +1,7 @@
 export interface User {
     user;
-    allowWrapEnable: boolean;
+    allowwrapenable: boolean;
     admin: boolean;
+    allowWrapEnableChanged: boolean;
+    adminChanged: boolean;
 }

@@ -64,6 +64,9 @@ export class ServerMessagesService {
         case 'iodataupdate':
           this.wcsService.getIOData().subscribe();
           break;
+        case 'usersetupupdate':
+          this.wcsService.getUserData().subscribe();
+          break;
       }
     });
 

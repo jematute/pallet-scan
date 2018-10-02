@@ -5,10 +5,11 @@ import {TableModule} from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import {CheckboxModule} from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule, TableModule, CheckboxModule, ButtonModule
+    CommonModule, FormsModule, TableModule, CheckboxModule, ButtonModule, DialogModule
   ],
   declarations: [UserSetupComponent]
 })

@@ -30,6 +30,28 @@ export class AppComponent implements OnInit {
   private serverMessages = [];
   title = 'pallet-scan';
 
+  showPopup = true;
+  popupData = {
+    type: 'popup',
+    data: 'the retro encablulator fluid is low',
+    textColor: 'rgb(255,0,0)',
+    backgroundColor: 'rgb(233,222,12)',
+    borderColor: 'rgb(45,44,123',
+    buttons: [{
+      data: 'si',
+      textcolor: 'rgb(54,44,122)',
+      buttoncolor: 'rgb(200,22,45)'
+    }, {
+      data: 'no',
+      textcolor: 'rgb(54,44,122)',
+      buttoncolor: 'rgb(200,22,45)'
+    }, {
+      data: 'cancelar',
+      textcolor: 'rgb(54,44,122)',
+      buttoncolor: 'rgb(200,22,45)'
+    }]
+  }
+
   ngOnInit(): void {
 
     console.log(this.startup.startupData);
@@ -44,6 +66,10 @@ export class AppComponent implements OnInit {
   }
   getState(outlet) {
     return outlet.activatedRouteData.state;
+  }
+
+  popupButtonClicked(button) {
+    console.log(button.data);
   }
 
 }
