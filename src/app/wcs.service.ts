@@ -50,7 +50,9 @@ export class WcsService {
   onStopButtonUpdate = new EventEmitter<any>();
   onIODataUpdate = new EventEmitter<any>();
   onUserDataUpdate = new EventEmitter<any>();
-
+  onPopUp = new EventEmitter<any>();
+  onPopupClose = new EventEmitter<any>();
+  
   startPalletScan(): Observable < any > {
     return this.http.get(this.startup.startupData.wcsURL + `/startscan`).pipe(tap(resp => {
       this.started = true;
@@ -173,6 +175,12 @@ export class WcsService {
     .pipe(switchMap(() => {
       return this.getUserData();
     }));
+  }
+
+  popupButton(data: any) {
+    return this.http.post(`${this.startup.startupData.wcsURL}/popupbutton`, JSON.stringify(data), { 
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
 

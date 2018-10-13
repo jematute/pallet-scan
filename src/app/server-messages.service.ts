@@ -25,6 +25,7 @@ export class ServerMessagesService {
     rws.addEventListener('message', resp => {
       const response = resp as any;
       const data = JSON.parse(response.data);
+      console.log('message from server: ', resp)
       switch (data.message.type) {
         case 'userupdate':
           this.navbar.onUpdateLoginBox.emit(data.message);
@@ -66,6 +67,12 @@ export class ServerMessagesService {
           break;
         case 'usersetupupdate':
           this.wcsService.getUserData().subscribe();
+          break;
+        case 'popup':
+          this.wcsService.onPopUp.emit(data.message);
+          break;
+        case 'popupclose':
+          this.wcsService.onPopupClose.emit();
           break;
       }
     });
