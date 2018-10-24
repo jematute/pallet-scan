@@ -25,10 +25,10 @@ export class HomeComponent implements OnInit {
     {headerName: 'Case Barcode', field: 'barcode.data', width: 150, cellStyle: (param) => {
       return this.setCellStyle('barcode', param);
     }},
-    {headerName: 'Case Status', field: 'status.data', width: 120, cellStyle: (param) => {
+    {headerName: 'Case Status', field: 'status.data', autoHeight: true, width: 120, cellStyle: (param) => {
       return this.setCellStyle('status', param);
     }},
-    {headerName: 'Load ID', field: 'loadId.data', width: 80, cellStyle: (param) => {
+    {headerName: 'Load ID', field: 'loadId.data',  width: 80, cellStyle: (param) => {
       return this.setCellStyle('loadId', param);
     }}
   ];
@@ -39,7 +39,8 @@ export class HomeComponent implements OnInit {
     return {
       'background-color': background,
       'color': color,
-      'padding': '1px'
+      'padding': '1px',
+      'white-space': 'normal'
     }
   }
 

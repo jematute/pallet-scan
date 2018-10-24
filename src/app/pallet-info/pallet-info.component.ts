@@ -55,7 +55,7 @@ export class PalletInfoComponent implements OnInit {
     {headerName: 'Unit', field: 'unit.data', cellStyle: (param) => {
       return this.setCellStyle('unit', param);
     }},
-    {headerName: 'Alarm', field: 'alarm.data', cellStyle: (param) => {
+    {headerName: 'Alarm', field: 'alarm.data', autoHeight: true, cellStyle: (param) => {
       return this.setCellStyle('alarm', param);
     }},
     {headerName: 'TimeStamp', field: 'timestamp.data', cellStyle: (param) => {
@@ -153,7 +153,8 @@ export class PalletInfoComponent implements OnInit {
     return {
       'background-color': background,
       'color': color,
-      'padding': '1px'
+      'padding': '1px',
+      'white-space': 'normal'
     }
   }
 
