@@ -43,7 +43,6 @@
     <div class="circle-button"
       [ngStyle]="{ 'background-color': startButtonBackgroundColor, 'color': startButtonTextColor, 'border-color': startButtonBorderColor }">
       <div (click)="start()" class="button-area"></div>
-      <div *ngIf="wcsService.started || wcsService.userId.length === 0 || !wcsService.systemReady" class="disable-overlay"></div>
       <span>{{startButton}}</span>
     </div>
     <div class="circle-button"

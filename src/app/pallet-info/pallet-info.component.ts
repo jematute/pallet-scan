@@ -37,14 +37,14 @@ export class PalletInfoComponent implements OnInit {
   // start button
   startButton = 'Start Scan';
   startButtonTextColor = 'rgb(0,0,0)';
-  startButtonBackgroundColor = 'rgb(255,99,71)';
+  startButtonBackgroundColor = 'rgb(0,255,0)';
   startButtonBorderColor = 'rgb(230,230,230)';
 
 
   //stop button
   stopButton = 'Stop Scan';
   stopButtonTextColor = 'rgb(0,0,0)';
-  stopButtonBackgroundColor = 'rgb(20, 243, 49)';
+  stopButtonBackgroundColor = 'rgb(255,0,0)';
   stopButtonBorderColor = 'rgb(230,230,230)';
 
 
