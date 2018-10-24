@@ -23,7 +23,7 @@ export class CaseHistoryComponent implements OnInit {
     {headerName: 'Case Barcode', field: 'barcode.data',cellStyle: (param) => {
       return this.setCellStyle('barcode', param);
     }},
-    {headerName: 'Case Status', field: 'status.data', cellStyle: (param) => {
+    {headerName: 'Case Status', field: 'status.data', autoHeight: true, cellStyle: (param) => {
       return this.setCellStyle('status', param);
     }},
     {headerName: 'Load ID', field: 'loadId.data', cellStyle: (param) => {
@@ -48,7 +48,9 @@ export class CaseHistoryComponent implements OnInit {
     const color = param.data[columnName].textColor; 
     return {
       'background-color': background,
-      'color': color
+      'color': color,
+      'padding': '1px',
+      'white-space': 'normal'
     }
   }
 

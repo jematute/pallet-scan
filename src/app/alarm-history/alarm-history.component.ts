@@ -25,7 +25,7 @@ export class AlarmHistoryComponent implements OnInit {
     {headerName: 'Unit', field: 'unit.data', cellStyle: (param) => {
       return this.setCellStyle('unit', param);
     }},
-    {headerName: 'Alarm', field: 'alarm.data', cellStyle: (param) => {
+    {headerName: 'Alarm', field: 'alarm.data', autoHeight: true, cellStyle: (param) => {
       return this.setCellStyle('alarm', param);
     }},
     {headerName: 'TimeStamp', field: 'timestamp.data', cellStyle: (param) => {
@@ -38,7 +38,9 @@ export class AlarmHistoryComponent implements OnInit {
     const color = param.data[columnName].textColor; 
     return {
       'background-color': background,
-      'color': color
+      'color': color,
+      'padding': '1px',
+      'white-space': 'normal'
     }
   }
 
