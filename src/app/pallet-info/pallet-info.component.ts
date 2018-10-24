@@ -152,7 +152,8 @@ export class PalletInfoComponent implements OnInit {
     const color = param.data[columnName].textColor; 
     return {
       'background-color': background,
-      'color': color
+      'color': color,
+      'padding': '1px'
     }
   }
 
