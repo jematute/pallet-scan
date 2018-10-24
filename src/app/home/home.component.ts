@@ -22,13 +22,13 @@ export class HomeComponent implements OnInit {
   data: Case[];
 
   columnDefs = [
-    {headerName: 'Case Barcode', field: 'barcode.data', cellStyle: (param) => {
+    {headerName: 'Case Barcode', field: 'barcode.data', width: 150, cellStyle: (param) => {
       return this.setCellStyle('barcode', param);
     }},
-    {headerName: 'Case Status', field: 'status.data', cellStyle: (param) => {
+    {headerName: 'Case Status', field: 'status.data', width: 120, cellStyle: (param) => {
       return this.setCellStyle('status', param);
     }},
-    {headerName: 'Load ID', field: 'loadId.data', cellStyle: (param) => {
+    {headerName: 'Load ID', field: 'loadId.data', width: 80, cellStyle: (param) => {
       return this.setCellStyle('loadId', param);
     }}
   ];

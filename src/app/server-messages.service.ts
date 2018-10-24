@@ -24,7 +24,11 @@ export class ServerMessagesService {
 
     rws.addEventListener('message', resp => {
       const response = resp as any;
-      const data = JSON.parse(response.data);
+      let data;
+      data = JSON.parse(response.data);
+      if (data.message) {
+        data = data.message;
+      }
       //console.log('message from server: ', resp)
       switch (data.type) {
         case 'userupdate':
