@@ -104,6 +104,7 @@ export class PalletInfoComponent implements OnInit {
   onWrapEnabledFocus() {
     this.wrapEnableKeyboard = $('#keyboard-wrapenable').getkeyboard();
     this.wrapEnableKeyboard.reveal();
+    $('.ui-keyboard-enter').hide();
   }
 
   updatePalletStatus(data: any) {

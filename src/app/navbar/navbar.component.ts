@@ -14,12 +14,12 @@ declare var $;
 export class NavbarComponent implements OnInit {
 
   constructor(public navService: NavbarService, public router: Router, public wcsService: WcsService) {
-    this.date = this.getCurrentDate();    
+    this.date = this.getCurrentDate();
   }
 
-  loginId = "";
-  loginBoxFontColor = "rbg(0,0,0)";
-  loginBoxBackgrodundColor = "rbg(255,255,255)";
+  loginId = '';
+  loginBoxFontColor = 'rbg(0,0,0)';
+  loginBoxBackgrodundColor = 'rbg(255,255,255)';
   date: any;
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
       autoAccept: true,
       accepted: (event, keyboard, el) => {
         if (keyboard.$preview.val().length < 2 || keyboard.$preview.val().length > 10) {
-          this.wcsService.userId = '';      
+          this.wcsService.userId = '';
         } else {
           this.navService.sendLoginData(keyboard.$preview.val());
         }
@@ -63,10 +63,11 @@ export class NavbarComponent implements OnInit {
   onFocus() {
     const keyboard = $('#keyboard').getkeyboard();
     keyboard.reveal();
+    $('.ui-keyboard-enter').hide();
   }
 
   onLogout() {
-    this.navService.sendLoginData("Not Logged In");
+    this.navService.sendLoginData('Not Logged In');
   }
 
   buttonClicked() {
