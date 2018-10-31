@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WcsService } from '../wcs.service';
+import { GridApi } from 'ag-grid-community';
 
 declare var $;
 @Component({
@@ -8,29 +9,31 @@ declare var $;
   styleUrls: ['./pallet-info.component.less']
 })
 export class PalletInfoComponent implements OnInit {
+  //gridapi
+  private gridApi: GridApi;
 
   // system status
-  system = 'Ready';
+  system = '---';
   systemTextColor: 'rgb(0,0,0)';
   systemBackgroundColor: 'rgb(255,255,255)';
 
   // pallet scan
-  palletScan = 'Rotating';
+  palletScan = '---';
   palletScanTextColor = 'rgb(0,0,0)';
   palletScanBackgroundColor = 'rgb(255,255,255)';
 
   // pallet id
-  palletId = '12345';
+  palletId = '---';
   palletIdTextColor = 'rgb(0,0,0)';
   palletIdBackgroundColor = 'rgb(255,255,255)';
 
   // pallet status
-  palletStatus = 'Pallet OK';
+  palletStatus = '---';
   palletStatusTextColor = 'rgb(0,0,0)';
   palletStatusBackgroundColor = 'rgb(255,255,255)';
 
   // wrap enable
-  wrapEnable = 'Automatic';
+  wrapEnable = '---';
   wrapEnableTextColor = 'rgb(0,0,0)';
   wrapEnableBackgroundColor = 'rgb(255,255,255';
 
@@ -55,7 +58,7 @@ export class PalletInfoComponent implements OnInit {
     {headerName: 'Unit', field: 'unit.data', cellStyle: (param) => {
       return this.setCellStyle('unit', param);
     }},
-    {headerName: 'Alarm', field: 'alarm.data', autoHeight: true, cellStyle: (param) => {
+    {headerName: 'Alarm', field: 'alarm.data', cellStyle: (param) => {
       return this.setCellStyle('alarm', param);
     }},
     {headerName: 'TimeStamp', field: 'timestamp.data', cellStyle: (param) => {
@@ -82,7 +85,7 @@ export class PalletInfoComponent implements OnInit {
     this.wcsService.onStopButtonUpdate.subscribe(data => this.udateStopButton(data));
     this.wcsService.onSystemStatusUpdate.subscribe(data => this.udateSystemStatus(data));
     this.wcsService.onAlarmGridUpdate.subscribe(data => {
-      this.alarmData = data;
+      this.gridApi.setRowData(data);
     });
   }
 
@@ -156,6 +159,10 @@ export class PalletInfoComponent implements OnInit {
       'padding': '1px',
       'white-space': 'normal'
     }
+  }
+
+  onGridReady(api) {
+    this.gridApi = api;
   }
 
 

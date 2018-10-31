@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="data-el">
-      <span>Wrap Enable</span>
+      <span>Case Quantity</span>
       <input [ngStyle]="{ 'background-color': wrapEnableBackgroundColor, 'color': wrapEnableTextColor }" 
       [(ngModel)]="wrapEnable" (focus)="onWrapEnabledFocus()" type="text" class="wrap-enable">
       <input style="display: none" id="keyboard-wrapenable" type="text">
@@ -29,12 +29,12 @@
   <div class="alarm">
     <span>Alarms</span>
     <div class="alarm-box">
-      <app-grid [data]="alarmData" [columns]="columnDefs"></app-grid>
+      <app-grid (gridReady)="onGridReady($event)" [data]="alarmData" [columns]="columnDefs"></app-grid>
     </div>
   </div>
   <div class="system">
     <span>System</span>
-    <div [ngStyle]="{ 'background-color': systemBackgroundColor, 'color': systemEnableTextColor }" class="status">
+    <div [ngStyle]="{ 'background-color': systemBackgroundColor, 'color': systemTextColor }" class="status">
       {{system}}
     </div>
   </div>

@@ -8,6 +8,7 @@
     
     <div class="right-align">
         <div class="login-info">
+            <button (click)="onLogout()" pButton label="Logout" class="ui-button-danger" style="margin-right: 20px;"></button>
             <span>User Login</span>
             <input maxlength="10" (focus)="onFocus()" 
             [ngStyle]="{'background-color': loginBoxBackgrodundColor, 'color': loginBoxFontColor }" 

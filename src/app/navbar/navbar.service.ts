@@ -14,7 +14,10 @@ export class NavbarService {
 
 
   sendLoginData(user: string) {
-    return this.http.get(`${this.startup.startupData.wcsURL}/eventuserlogin?user=${user}`).subscribe();
+    return this.http.get(`${this.startup.startupData.wcsURL}/eventuserlogin?user=${user}`)
+    .subscribe(data => {
+      console.log(data);
+    });
   }
 
 }

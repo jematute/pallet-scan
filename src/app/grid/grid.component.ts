@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { range } from 'rxjs';
 import { GridApi } from 'ag-grid-community';
 
@@ -13,6 +13,7 @@ export class GridComponent implements OnInit {
 
   @Input() data = [];
   @Input() columns = [];
+  @Output() gridReady = new EventEmitter();
   showGoodCases = true;
   showErrorCases = false;
 
@@ -23,6 +24,7 @@ export class GridComponent implements OnInit {
   onGridReady($event) {
     this.gridApi = $event.api;
     this.gridApi.sizeColumnsToFit();
+    this.gridReady.emit($event.api);
   }
 
 }

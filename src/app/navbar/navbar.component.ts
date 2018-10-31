@@ -65,4 +65,12 @@ export class NavbarComponent implements OnInit {
     keyboard.reveal();
   }
 
+  onLogout() {
+    this.navService.sendLoginData("Not Logged In");
+  }
+
+  buttonClicked() {
+    alert();
+  }
+
 }

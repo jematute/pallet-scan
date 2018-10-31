@@ -22,7 +22,7 @@ export class AlarmHistoryComponent implements OnInit {
   data = [];
 
   columnDefs = [
-    {headerName: 'Unit', field: 'unit.data', cellStyle: (param) => {
+    {headerName: 'Unit',  field: 'unit.data', cellStyle: (param) => {
       return this.setCellStyle('unit', param);
     }},
     {headerName: 'Alarm', field: 'alarm.data', autoHeight: true, cellStyle: (param) => {

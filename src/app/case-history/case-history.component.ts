@@ -20,13 +20,13 @@ export class CaseHistoryComponent implements OnInit {
 
   data = [];
   columnDefs = [
-    {headerName: 'Case Barcode', field: 'barcode.data',cellStyle: (param) => {
+    {headerName: 'Case Barcode', width: 280, margin: 1, field: 'barcode.data',cellStyle: (param) => {
       return this.setCellStyle('barcode', param);
     }},
-    {headerName: 'Case Status', field: 'status.data', autoHeight: true, cellStyle: (param) => {
+    {headerName: 'Case Status', width: 200, field: 'status.data', autoHeight: true, cellStyle: (param) => {
       return this.setCellStyle('status', param);
     }},
-    {headerName: 'Load ID', field: 'loadId.data', cellStyle: (param) => {
+    {headerName: 'Load ID', width: 175, field: 'loadId.data', cellStyle: (param) => {
       return this.setCellStyle('loadId', param);
     }},
     {headerName: 'Pallet Status', field: 'palletStatus.data', cellStyle: (param) => {
